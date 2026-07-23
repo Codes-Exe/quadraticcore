@@ -1,4 +1,1331 @@
 <!doctype html>
+<html lang="tr" class="h-full">
+ <head><script>window["__codeletBootstrap__"]=JSON.parse('{"A":"A","B":"20260723-05-e9a76f4"}');</script><script src="/_sdk/e358eac22bd01364.telemetry_sdk.js" integrity="sha512-KPxp3rw4K8Nu9ceWJc3gyM7srgaZxiFWOVbyu260EYzzAqdz10mfo5xyXrCx+wEKtGo77JbtmwXvFLbwrGzwvw=="></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Octal Digital Math Galaxy</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/58fe3688b755eeb3.element_sdk.js" integrity="sha512-OMjvInGwXrNzr3Wzjbb1g4+6UqSJ6JZQ8iyW9B1TgkUVKtQQya+sYfHVDL3seI5VxPiNT5nwy1K0LUByUi9ETQ=="></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&amp;family=Fredoka:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; width: 100%; }
+
+@keyframes starFloat {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.6; }
+  50% { transform: translateY(-15px) scale(1.3); opacity: 1; }
+}
+@keyframes planetSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes rocketBounce {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  25% { transform: translateY(-20px) rotate(5deg); }
+  50% { transform: translateY(-10px) rotate(-3deg); }
+  75% { transform: translateY(-25px) rotate(3deg); }
+}
+@keyframes robotWalk {
+  0%, 100% { transform: translateX(0) scaleX(1); }
+  25% { transform: translateX(10px) scaleX(1); }
+  50% { transform: translateX(0) scaleX(-1); }
+  75% { transform: translateX(-10px) scaleX(-1); }
+}
+@keyframes pulseGlow {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(0,255,200,0.4)); }
+  50% { filter: drop-shadow(0 0 20px rgba(0,255,200,0.8)); }
+}
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes cosmicPulse {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; transform: scale(1); }
+}
+@keyframes orbit {
+  0% { transform: rotate(0deg) translateX(60px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(60px) rotate(-360deg); }
+}
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+.star { animation: starFloat 3s ease-in-out infinite; }
+.rocket { animation: rocketBounce 4s ease-in-out infinite; }
+.robot-char { animation: robotWalk 3s ease-in-out infinite; }
+.planet-ring { animation: planetSpin 20s linear infinite; }
+.glow-pulse { animation: pulseGlow 2s ease-in-out infinite; }
+.fade-in { animation: fadeSlideIn 0.6s ease-out forwards; }
+.cosmic-bg {
+  background: linear-gradient(135deg, #0a0a2e, #1a0a3e, #0a1a3e, #0a0a2e);
+  background-size: 400% 400%;
+  animation: cosmicPulse 15s ease infinite;
+}
+
+.galaxy-card {
+  background: linear-gradient(145deg, rgba(20,10,60,0.9), rgba(10,20,50,0.95));
+  border: 1px solid rgba(100,200,255,0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+.galaxy-card:hover {
+  border-color: rgba(100,200,255,0.4);
+  box-shadow: 0 0 30px rgba(0,150,255,0.15);
+}
+
+.math-input {
+  background: rgba(10,15,40,0.8);
+  border: 2px solid rgba(100,200,255,0.2);
+  border-radius: 12px;
+  color: #e0f0ff;
+  padding: 12px 16px;
+  font-family: 'Orbitron', monospace;
+  font-size: 16px;
+  transition: all 0.3s;
+  width: 100%;
+}
+.math-input:focus {
+  outline: none;
+  border-color: #00ffc8;
+  box-shadow: 0 0 15px rgba(0,255,200,0.2);
+}
+
+.solve-btn {
+  background: linear-gradient(135deg, #00c8ff, #0066ff);
+  border: none;
+  border-radius: 14px;
+  color: white;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  padding: 14px 32px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 16px;
+}
+.solve-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,100,255,0.4);
+}
+.solve-btn:active { transform: translateY(0); }
+
+.method-tab {
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 500;
+  transition: all 0.3s;
+  border: 1px solid rgba(100,200,255,0.15);
+  background: rgba(20,20,60,0.6);
+  color: #8899bb;
+  font-size: 14px;
+}
+.method-tab.active {
+  background: linear-gradient(135deg, #00c8ff22, #6600ff22);
+  border-color: #00c8ff;
+  color: #00ffc8;
+}
+.method-tab:hover:not(.active) { border-color: rgba(100,200,255,0.4); color: #aabbdd; }
+
+.step-box {
+  background: rgba(5,10,30,0.7);
+  border-left: 3px solid #00c8ff;
+  border-radius: 0 12px 12px 0;
+  padding: 14px 18px;
+  margin: 8px 0;
+  font-family: 'Orbitron', monospace;
+  font-size: 13px;
+  color: #c0d8f0;
+  line-height: 1.8;
+}
+
+.nav-btn {
+  padding: 10px 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 500;
+  transition: all 0.3s;
+  border: 1px solid rgba(100,200,255,0.1);
+  background: transparent;
+  color: #8899bb;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-btn.active, .nav-btn:hover {
+  background: rgba(0,200,255,0.1);
+  border-color: rgba(0,200,255,0.3);
+  color: #00ffc8;
+}
+
+.cartoon-robot {
+  display: inline-block;
+  font-size: 2rem;
+  animation: robotWalk 3s ease-in-out infinite;
+}
+
+.toast-msg {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #00c8ff, #6600ff);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-family: 'Fredoka', sans-serif;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.toast-msg.show { opacity: 1; }
+
+.scrollable { overflow-y: auto; overflow-x: hidden; }
+.scrollable::-webkit-scrollbar { width: 6px; }
+.scrollable::-webkit-scrollbar-track { background: rgba(10,10,40,0.3); border-radius: 3px; }
+.scrollable::-webkit-scrollbar-thumb { background: rgba(0,200,255,0.3); border-radius: 3px; }
+
+.discriminant-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-family: 'Orbitron', monospace;
+  font-size: 12px;
+  font-weight: 700;
+}
+.disc-positive { background: rgba(0,255,100,0.15); color: #00ff64; border: 1px solid rgba(0,255,100,0.3); }
+.disc-zero { background: rgba(255,200,0,0.15); color: #ffc800; border: 1px solid rgba(255,200,0,0.3); }
+.disc-negative { background: rgba(255,50,100,0.15); color: #ff3264; border: 1px solid rgba(255,50,100,0.3); }
+
+.galaxy-scene {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: radial-gradient(ellipse at center, #0a0a3e 0%, #050520 100%);
+}
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/935a53bc2e11fb8d.data_sdk.js" type="text/javascript" integrity="sha512-qr2oyPnEys1WebcOABaRh6hG77r5PWpqeWW6JTKbRJqly/INsfBi31CVNlTmHqjgeLpkVmmHZJUdxSx/32tOFQ=="></script>
+ </head>
+ <body class="h-full w-full cosmic-bg text-white scrollable">
+  <div id="app" class="w-full h-full scrollable" style="min-height:100%;"><!-- Stars Background -->
+   <div id="stars-container" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;"></div><!-- Navigation -->
+   <nav class="sticky top-0 z-50 px-4 py-3" style="background:rgba(5,5,25,0.9);backdrop-filter:blur(15px);border-bottom:1px solid rgba(100,200,255,0.1);">
+    <div class="max-w-6xl mx-auto flex items-center justify-between flex-wrap gap-2">
+     <div class="flex items-center gap-3">
+      <div class="text-2xl">
+       ⌘
+      </div>
+      <div>
+       <h1 id="mainTitle" class="text-base font-bold" style="font-family:'Orbitron',monospace;background:linear-gradient(90deg,#00ffc8,#00c8ff,#6644ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">OCTAL DIGITAL</h1>
+       <p id="subtitle" class="text-xs" style="color:#5566aa;font-family:'Fredoka',sans-serif;">Mathematical Galaxy ⍟</p>
+      </div>
+     </div>
+     <div class="flex items-center gap-2 flex-wrap"><button class="nav-btn active" onclick="showPage('math')" id="nav-math"> <i data-lucide="calculator" style="width:14px;height:14px;"></i> Matematik </button> <button class="nav-btn" onclick="showPage('galaxy')" id="nav-galaxy"> <i data-lucide="globe" style="width:14px;height:14px;"></i> Galaksi </button> <button class="nav-btn" onclick="showPage('games')" id="nav-games"> <i data-lucide="gamepad-2" style="width:14px;height:14px;"></i> Oyunlar </button> <button class="nav-btn" onclick="showPage('history')" id="nav-history"> <i data-lucide="scroll-text" style="width:14px;height:14px;"></i> Tarih </button> <button class="nav-btn" onclick="showPage('archive')" id="nav-archive"> <i data-lucide="archive" style="width:14px;height:14px;"></i> Arşiv </button>
+     </div>
+    </div>
+   </nav><!-- MATH PAGE -->
+   <div id="page-math" class="page-content max-w-6xl mx-auto px-4 py-6" style="position:relative;z-index:1;"><!-- Hero Scene -->
+    <div class="galaxy-scene mb-6" id="heroScene">
+     <canvas id="heroCanvas" style="width:100%;height:100%;"></canvas>
+     <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;">
+      <div style="font-size:3rem;margin-bottom:8px;">
+       🤖
+      </div>
+      <h2 style="font-family:'Orbitron',monospace;font-size:1.2rem;background:linear-gradient(90deg,#00ffc8,#00c8ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Kuadratik Denklem Çözücü</h2>
+      <p style="font-family:'Fredoka',sans-serif;color:#6677aa;font-size:0.8rem;margin-top:4px;">⍜ 3 Farklı Yöntem • Adım Adım • Doğrulama ⍜</p>
+     </div><!-- Floating cartoon characters -->
+     <div class="rocket" style="position:absolute;top:20px;right:40px;font-size:2rem;">
+      🚀
+     </div>
+     <div class="star" style="position:absolute;top:30px;left:30px;font-size:1.5rem;">
+      ⭐
+     </div>
+     <div class="star" style="position:absolute;bottom:30px;right:80px;font-size:1rem;animation-delay:1s;">
+      ✨
+     </div>
+     <div class="robot-char" style="position:absolute;bottom:20px;left:50px;font-size:1.8rem;">
+      🛸
+     </div>
+    </div><!-- Equation Input -->
+    <div class="galaxy-card p-6 mb-6 fade-in">
+     <div class="flex items-center gap-3 mb-4"><span style="font-size:1.5rem;">⎕</span>
+      <h3 style="font-family:'Orbitron',monospace;font-size:1rem;color:#00ffc8;">Denklemi Gir: ax² + bx + c = 0</h3>
+     </div>
+     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
+      <div><label style="font-family:'Fredoka',sans-serif;color:#5566aa;font-size:12px;display:block;margin-bottom:6px;">a (x² katsayısı)</label> <input type="number" id="coeff-a" class="math-input" value="1" step="any">
+      </div>
+      <div><label style="font-family:'Fredoka',sans-serif;color:#5566aa;font-size:12px;display:block;margin-bottom:6px;">b (x katsayısı)</label> <input type="number" id="coeff-b" class="math-input" value="-5" step="any">
+      </div>
+      <div><label style="font-family:'Fredoka',sans-serif;color:#5566aa;font-size:12px;display:block;margin-bottom:6px;">c (sabit terim)</label> <input type="number" id="coeff-c" class="math-input" value="6" step="any">
+      </div>
+     </div>
+     <div class="flex flex-wrap gap-3 items-center"><button class="solve-btn" onclick="solveEquation()"> <span style="display:flex;align-items:center;gap:8px;">⍟ Çöz!</span> </button> <button class="solve-btn" style="background:linear-gradient(135deg,#6644ff,#aa00ff);" onclick="randomEquation()"> 🎲 Rastgele </button> <button class="solve-btn" style="background:linear-gradient(135deg,#ffaa00,#ff6644);" onclick="saveToArchive()" id="saveBtn"> 💾 Kaydet </button>
+      <div id="equationDisplay" style="font-family:'Orbitron',monospace;color:#00ffc8;font-size:14px;margin-left:8px;"></div>
+     </div>
+    </div><!-- Results -->
+    <div id="results" style="display:none;"><!-- Discriminant Card -->
+     <div class="galaxy-card p-5 mb-5 fade-in" id="discCard">
+      <div class="flex items-center gap-3 mb-3"><span style="font-size:1.3rem;">⍤</span>
+       <h3 style="font-family:'Orbitron',monospace;font-size:0.95rem;color:#ffc800;">Diskriminant Analizi</h3>
+      </div>
+      <div id="discContent"></div>
+     </div><!-- Method Tabs -->
+     <div class="flex gap-2 mb-4 flex-wrap"><button class="method-tab active" id="tab-formula" onclick="showMethod('formula')">📐 Kök Formülü</button> <button class="method-tab" id="tab-square" onclick="showMethod('square')">⬛ Tam Kare</button> <button class="method-tab" id="tab-factor" onclick="showMethod('factor')">🔢 Çarpanlara Ayırma</button>
+     </div><!-- Method Contents -->
+     <div class="galaxy-card p-5 mb-5 fade-in" id="method-formula"></div>
+     <div class="galaxy-card p-5 mb-5 fade-in" id="method-square" style="display:none;"></div>
+     <div class="galaxy-card p-5 mb-5 fade-in" id="method-factor" style="display:none;"></div><!-- Verification -->
+     <div class="galaxy-card p-5 mb-5 fade-in" id="verifyCard">
+      <div class="flex items-center gap-3 mb-3"><span style="font-size:1.3rem;">✅</span>
+       <h3 style="font-family:'Orbitron',monospace;font-size:0.95rem;color:#00ff64;">Doğrulama</h3>
+      </div>
+      <div id="verifyContent"></div>
+     </div><!-- Graph -->
+     <div class="galaxy-card p-5 mb-6 fade-in">
+      <div class="flex items-center gap-3 mb-3"><span style="font-size:1.3rem;">📊</span>
+       <h3 style="font-family:'Orbitron',monospace;font-size:0.95rem;color:#aa88ff;">Grafik</h3>
+      </div>
+      <canvas id="graphCanvas" style="width:100%;height:250px;border-radius:12px;background:rgba(5,5,20,0.8);"></canvas>
+     </div>
+    </div>
+   </div><!-- GALAXY PAGE -->
+   <div id="page-galaxy" class="page-content max-w-6xl mx-auto px-4 py-6" style="display:none;position:relative;z-index:1;">
+    <div class="text-center mb-6">
+     <div style="font-size:3rem;margin-bottom:8px;">
+      🌌
+     </div>
+     <h2 style="font-family:'Orbitron',monospace;font-size:1.4rem;background:linear-gradient(90deg,#ff6644,#ffaa00,#00ffc8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Octal Galaksisi</h2>
+     <p style="font-family:'Fredoka',sans-serif;color:#6677aa;font-size:0.85rem;margin-top:6px;">Gezegenler, uzay gemileri ve kozmik yapılar</p>
+    </div>
+    <div class="galaxy-scene mb-6" style="height:300px;">
+     <canvas id="galaxyCanvas" style="width:100%;height:100%;"></canvas>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+     <div class="galaxy-card p-5 text-center">
+      <div style="font-size:3rem;margin-bottom:8px;">
+       🪐
+      </div>
+      <h4 style="font-family:'Orbitron',monospace;color:#ffaa00;font-size:0.9rem;">Octalus Prime</h4>
+      <p style="font-family:'Fredoka',sans-serif;color:#6677aa;font-size:0.8rem;margin-top:6px;">Ana gezegen. Tüm hesaplamalar burada başlar. Sekizlik sistemin doğduğu yer.</p>
+      <div class="cartoon-robot" style="margin-top:10px;">
+       🤖
+      </div>
+     </div>
+     <div class="galaxy-card p-5 text-center">
+      <div style="font-size:3rem;margin-bottom:8px;">
+       🌟
+      </div>
+      <h4 style="font-family:'Orbitron',monospace;color:#00ffc8;font-size:0.9rem;">Quantum Nebula</h4>
+      <p style="font-family:'Fredoka',sans-serif;color:#6677aa;font-size:0.8rem;margin-top:6px;">Kuantum dolanıklığın korunduğu kozmik bulutsu. ⌥ Protokolleri burada çalışır.</p>
+      <div class="rocket" style="font-size:2rem;display:inline-block;margin-top:10px;">
+       🚀
+      </div>
+     </div>
+     <div class="galaxy-card p-5 text-center">
+      <div style="font-size:3rem;margin-bottom:8px;">
+       🛰️
+      </div>
+      <h4 style="font-family:'Orbitron',monospace;color:#ff6688;font-size:0.9rem;">İstasyon Sigma-8</h4>
+      <p style="font-family:'Fredoka',sans-serif;color:#6677aa;font-size:0.8rem;margin-top:6px;">Uzay istasyonu. Teknisyenler ve araştırmacılar burada çalışır.</p>
+      <div class="robot-char" style="font-size:2rem;display:inline-block;margin-top:10px;">
+       👨‍🚀
+      </div>
+     </div>
+     <div class="galaxy-card p-5 text-center">
+      <div style="font-size:3rem;margin-bottom:8px;">
+       🔬
+      </div>
+      <h4 style="font-family:'Orbitron',monospace;color:#88aaff;font-size:0.9rem;">Laboratuvar Omega</h4>
+      <p style="font-family:'Fredoka',sans-serif;color:#6677aa;font-size:0.8rem;margin-top:6px;">Fizik ve matematik araştırma merkezi. Formüller burada keşfedilir.</p>
+      <div style="font-size:2rem;margin-top:10px;">
+       🧪
+      </div>
+     </div>
+     <div class="galaxy-card p-5 text-center">
+      <div style="font-size:3rem;margin-bottom:8px;">
+       📡
+      </div>
+      <h4 style="font-family:'Orbitron',monospace;color:#ffcc44;font-size:0.9rem;">İletişim Ağı</h4>
+      <p style="font-family:'Fredoka',sans-serif;color:#6677aa;font-size:0.8rem;margin-top:6px;">Galaksi çapında network. Tüm veri akışı buradan geçer.</p>
+      <div style="font-size:2rem;margin-top:10px;">
+       🌐
+      </div>
+     </div>
+     <div class="galaxy-card p-5 text-center">
+      <div style="font-size:3rem;margin-bottom:8px;">
+       🏟️
+      </div>
+      <h4 style="font-family:'Orbitron',monospace;color:#ff8844;font-size:0.9rem;">Kozmik Arena</h4>
+      <p style="font-family:'Fredoka',sans-serif;color:#6677aa;font-size:0.8rem;margin-top:6px;">Dijital spor müsabakaları ve oyun turnuvaları burada düzenlenir!</p>
+      <div style="font-size:2rem;margin-top:10px;">
+       ⚽
+      </div>
+     </div>
+    </div>
+   </div><!-- GAMES PAGE -->
+   <div id="page-games" class="page-content max-w-6xl mx-auto px-4 py-6" style="display:none;position:relative;z-index:1;">
+    <div class="text-center mb-6">
+     <div style="font-size:3rem;margin-bottom:8px;">
+      🎮
+     </div>
+     <h2 style="font-family:'Orbitron',monospace;font-size:1.4rem;background:linear-gradient(90deg,#ff44aa,#ffaa00,#44ff88);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Octal Oyunları</h2>
+    </div><!-- Math Quiz Game -->
+    <div class="galaxy-card p-6 mb-5">
+     <div class="flex items-center gap-3 mb-4"><span style="font-size:1.5rem;">🧠</span>
+      <h3 style="font-family:'Orbitron',monospace;font-size:1rem;color:#ffaa00;">Hızlı Matematik Yarışması</h3>
+      <div id="gameScore" style="margin-left:auto;font-family:'Orbitron',monospace;color:#00ffc8;font-size:0.9rem;">
+       Skor: 0
+      </div>
+     </div>
+     <div id="quizArea" style="text-align:center;">
+      <div id="quizQuestion" style="font-family:'Orbitron',monospace;font-size:1.8rem;color:#fff;margin:20px 0;"></div>
+      <div id="quizTimer" style="font-family:'Fredoka',sans-serif;color:#ff6688;margin-bottom:15px;"></div>
+      <div id="quizOptions" class="grid grid-cols-2 gap-3 max-w-md mx-auto"></div>
+      <div id="quizFeedback" style="font-family:'Fredoka',sans-serif;margin-top:15px;font-size:1.1rem;min-height:30px;"></div><button class="solve-btn mt-4" onclick="startQuiz()" id="quizStartBtn">🚀 Başla!</button>
+     </div>
+    </div><!-- Space Shooter Mini -->
+    <div class="galaxy-card p-6 mb-5">
+     <div class="flex items-center gap-3 mb-4"><span style="font-size:1.5rem;">🛸</span>
+      <h3 style="font-family:'Orbitron',monospace;font-size:1rem;color:#00c8ff;">Uzay Gemisi Macerası</h3>
+      <div id="spaceScore" style="margin-left:auto;font-family:'Orbitron',monospace;color:#ffaa00;font-size:0.9rem;">
+       Puan: 0
+      </div>
+     </div>
+     <canvas id="spaceCanvas" style="width:100%;height:280px;border-radius:12px;background:#050515;cursor:pointer;" onclick="shootBullet(event)"></canvas>
+     <div class="flex gap-3 mt-3 justify-center"><button class="solve-btn" onclick="startSpaceGame()" style="background:linear-gradient(135deg,#ff6644,#ff2266);">🎮 Oyna</button>
+      <p style="font-family:'Fredoka',sans-serif;color:#5566aa;font-size:0.75rem;align-self:center;">Asteroitleri vurmak için tıkla!</p>
+     </div>
+    </div>
+   </div><!-- HISTORY PAGE -->
+   <div id="page-history" class="page-content max-w-6xl mx-auto px-4 py-6" style="display:none;position:relative;z-index:1;">
+    <div class="text-center mb-6">
+     <div style="font-size:3rem;margin-bottom:8px;">
+      📜
+     </div>
+     <h2 style="font-family:'Orbitron',monospace;font-size:1.4rem;background:linear-gradient(90deg,#ffaa00,#ff6644,#aa44ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Octal'ın Tarihi</h2>
+     <p style="font-family:'Fredoka',sans-serif;color:#6677aa;font-size:0.85rem;margin-top:6px;">Taş devrinden galaktik çağa... ⍩</p>
+    </div>
+    <div class="relative" style="padding-left:30px;">
+     <div style="position:absolute;left:14px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,#00ffc8,#6644ff,#ff4488);"></div>
+     <div class="mb-6 relative fade-in" style="animation-delay:0.1s;">
+      <div style="position:absolute;left:-24px;top:8px;width:16px;height:16px;border-radius:50%;background:#00ffc8;border:3px solid #0a0a2e;"></div>
+      <div class="galaxy-card p-5">
+       <div class="flex items-center gap-3 mb-2"><span style="font-size:2rem;">🪨</span>
+        <div>
+         <h4 style="font-family:'Orbitron',monospace;color:#ffaa00;font-size:0.85rem;">Taş Devri Başlangıcı</h4><span style="font-family:'Fredoka',sans-serif;color:#5566aa;font-size:0.7rem;">~ Epoch 0</span>
+        </div>
+       </div>
+       <p style="font-family:'Fredoka',sans-serif;color:#8899bb;font-size:0.8rem;">İlk sayma sistemi. Mağara duvarlarına sekizlik işaretler. Octal'ın ilk kıvılcımı parmaklarla saymaktan doğdu! 🤖 Robot-ata "CALC-01" ilk hesaplamayı yaptı.</p>
+      </div>
+     </div>
+     <div class="mb-6 relative fade-in" style="animation-delay:0.2s;">
+      <div style="position:absolute;left:-24px;top:8px;width:16px;height:16px;border-radius:50%;background:#00c8ff;border:3px solid #0a0a2e;"></div>
+      <div class="galaxy-card p-5">
+       <div class="flex items-center gap-3 mb-2"><span style="font-size:2rem;">⚙️</span>
+        <div>
+         <h4 style="font-family:'Orbitron',monospace;color:#00c8ff;font-size:0.85rem;">Mekanik Çağ</h4><span style="font-family:'Fredoka',sans-serif;color:#5566aa;font-size:0.7rem;">~ Epoch 256</span>
+        </div>
+       </div>
+       <p style="font-family:'Fredoka',sans-serif;color:#8899bb;font-size:0.8rem;">Dişli çarklar ve mekanik hesap makineleri. Octal sistemi sekizlik dünyada ilk defa makineleşti. 🤖 "GEAR-8" robotu fabrikaları yönetti!</p>
+      </div>
+     </div>
+     <div class="mb-6 relative fade-in" style="animation-delay:0.3s;">
+      <div style="position:absolute;left:-24px;top:8px;width:16px;height:16px;border-radius:50%;background:#6644ff;border:3px solid #0a0a2e;"></div>
+      <div class="galaxy-card p-5">
+       <div class="flex items-center gap-3 mb-2"><span style="font-size:2rem;">💻</span>
+        <div>
+         <h4 style="font-family:'Orbitron',monospace;color:#aa88ff;font-size:0.85rem;">Dijital Devrim</h4><span style="font-family:'Fredoka',sans-serif;color:#5566aa;font-size:0.7rem;">~ Epoch 512</span>
+        </div>
+       </div>
+       <p style="font-family:'Fredoka',sans-serif;color:#8899bb;font-size:0.8rem;">Bilgisayarlar doğdu! Sekizlik sayı sistemi bilgisayar biliminin temelini oluşturdu. Büyük Yakınsama Çağı başladı. ⌘ İlk protokol kuruldu.</p>
+      </div>
+     </div>
+     <div class="mb-6 relative fade-in" style="animation-delay:0.4s;">
+      <div style="position:absolute;left:-24px;top:8px;width:16px;height:16px;border-radius:50%;background:#ff4488;border:3px solid #0a0a2e;"></div>
+      <div class="galaxy-card p-5">
+       <div class="flex items-center gap-3 mb-2"><span style="font-size:2rem;">🧬</span>
+        <div>
+         <h4 style="font-family:'Orbitron',monospace;color:#ff6688;font-size:0.85rem;">Mutasyon &amp; Evrim</h4><span style="font-family:'Fredoka',sans-serif;color:#5566aa;font-size:0.7rem;">~ Epoch 777</span>
+        </div>
+       </div>
+       <p style="font-family:'Fredoka',sans-serif;color:#8899bb;font-size:0.8rem;">Robotlar evrimleşti! Yapay zeka ve insanoğlu birleşti. Karikatür robotlar komik hareketler yaparak galaksiyi eğlendirdi. Evrensel ruhlar izledi... 👁️</p>
+      </div>
+     </div>
+     <div class="mb-6 relative fade-in" style="animation-delay:0.5s;">
+      <div style="position:absolute;left:-24px;top:8px;width:16px;height:16px;border-radius:50%;background:#ffaa00;border:3px solid #0a0a2e;"></div>
+      <div class="galaxy-card p-5">
+       <div class="flex items-center gap-3 mb-2"><span style="font-size:2rem;">🌌</span>
+        <div>
+         <h4 style="font-family:'Orbitron',monospace;color:#ffaa00;font-size:0.85rem;">Galaktik Çağ (Şimdi)</h4><span style="font-family:'Fredoka',sans-serif;color:#5566aa;font-size:0.7rem;">~ Epoch 1024</span>
+        </div>
+       </div>
+       <p style="font-family:'Fredoka',sans-serif;color:#8899bb;font-size:0.8rem;">Octal artık gezegenler yaratıyor! Kuantum dolanıklık korunuyor. ⍟ Spor müsabakaları, dijital oyunlar, araştırma istasyonları... Tanrı ve evrensel ruhlar izliyor. 🤖 Octal hepsinin önünde kendi hikayesini anlatıyor!</p>
+      </div>
+     </div>
+    </div><!-- Octal Storyteller -->
+    <div class="galaxy-card p-6 mt-4 text-center">
+     <div style="font-size:4rem;margin-bottom:10px;" class="robot-char">
+      🤖
+     </div>
+     <p style="font-family:'Fredoka',sans-serif;color:#aabbdd;font-size:0.9rem;line-height:1.8;">"Ben Octal! Taş devrinde doğdum, dişlilerle büyüdüm, dijitalle evrimleştim.<br>
+       Şimdi galaksilerde gezegenler yaratıyorum! ⌘ ⌥ ⍜ ⍟ ⍣<br>
+       Her hesaplama bir yıldız, her formül bir gezegen...<br>
+       Evrensel ruhlar ve tanrı bizi izlerken, biz matematik yapıyoruz!" 🌟</p>
+    </div>
+   </div><!-- ARCHIVE PAGE -->
+   <div id="page-archive" class="page-content max-w-6xl mx-auto px-4 py-6" style="display:none;position:relative;z-index:1;">
+    <div class="text-center mb-6">
+     <div style="font-size:3rem;margin-bottom:8px;">
+      📦
+     </div>
+     <h2 style="font-family:'Orbitron',monospace;font-size:1.4rem;background:linear-gradient(90deg,#6644ff,#00c8ff,#00ffc8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Çözüm Arşivi</h2>
+     <p style="font-family:'Fredoka',sans-serif;color:#6677aa;font-size:0.85rem;margin-top:6px;">Çözülen denklemleri kaydet, yönet ve sil</p>
+    </div>
+    <div class="galaxy-card p-6 mb-6">
+     <div class="flex items-center gap-3 mb-4 justify-between flex-wrap">
+      <div class="flex items-center gap-3"><span style="font-size:1.3rem;">💾</span>
+       <h3 style="font-family:'Orbitron',monospace;font-size:1rem;color:#00ffc8;">Kaydedilmiş Denklemler</h3>
+      </div>
+      <div id="archiveCount" style="font-family:'Orbitron',monospace;color:#ffaa00;font-size:0.9rem;">
+       Toplam: 0
+      </div>
+     </div>
+     <div id="archiveList" class="space-y-2" style="min-height:100px;">
+      <p style="font-family:'Fredoka',sans-serif;color:#5566aa;text-align:center;padding:20px;">Henüz kaydedilmiş denklem yok. Çöz butonunun yanında 💾 simgesine tıkla!</p>
+     </div>
+    </div>
+   </div><!-- Toast -->
+   <div id="toast" class="toast-msg"></div>
+  </div>
+  <script>
+// ─── Config & SDK ───
+const defaultConfig = {
+  main_title: 'OCTAL DIGITAL',
+  subtitle: 'Mathematical Galaxy ⍟',
+  background_color: '#0a0a2e',
+  surface_color: '#140a3c',
+  text_color: '#c0d8f0',
+  primary_action: '#00c8ff',
+  secondary_action: '#6644ff'
+};
+
+let config = { ...defaultConfig };
+let archiveData = [];
+
+// Data SDK Handler
+const dataHandler = {
+  onDataChanged(data) {
+    archiveData = data;
+    updateArchiveDisplay();
+  }
+};
+
+// Initialize Data SDK
+(async () => {
+  const result = await window.dataSdk.init(dataHandler);
+  if (!result.isOk) console.error('Data SDK init failed');
+})();
+
+window.elementSdk.init({
+  defaultConfig,
+  onConfigChange: async (c) => {
+    config = { ...defaultConfig, ...c };
+    const t = document.getElementById('mainTitle');
+    const s = document.getElementById('subtitle');
+    if (t) t.textContent = config.main_title;
+    if (s) s.textContent = config.subtitle;
+    document.body.style.background = `linear-gradient(135deg, ${config.background_color}, ${config.surface_color}, ${config.background_color})`;
+  },
+  mapToCapabilities: (c) => ({
+    recolorables: [
+      { get: () => c.background_color || defaultConfig.background_color, set: v => { c.background_color = v; window.elementSdk.setConfig({ background_color: v }); }},
+      { get: () => c.surface_color || defaultConfig.surface_color, set: v => { c.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); }},
+      { get: () => c.text_color || defaultConfig.text_color, set: v => { c.text_color = v; window.elementSdk.setConfig({ text_color: v }); }},
+      { get: () => c.primary_action || defaultConfig.primary_action, set: v => { c.primary_action = v; window.elementSdk.setConfig({ primary_action: v }); }},
+      { get: () => c.secondary_action || defaultConfig.secondary_action, set: v => { c.secondary_action = v; window.elementSdk.setConfig({ secondary_action: v }); }}
+    ],
+    borderables: [],
+    fontEditable: {
+      get: () => c.font_family || 'Orbitron',
+      set: v => { c.font_family = v; window.elementSdk.setConfig({ font_family: v }); }
+    },
+    fontSizeable: {
+      get: () => c.font_size || 16,
+      set: v => { c.font_size = v; window.elementSdk.setConfig({ font_size: v }); }
+    }
+  }),
+  mapToEditPanelValues: (c) => new Map([
+    ['main_title', c.main_title || defaultConfig.main_title],
+    ['subtitle', c.subtitle || defaultConfig.subtitle]
+  ])
+});
+
+// ─── Navigation ───
+function showPage(page) {
+  document.querySelectorAll('.page-content').forEach(p => p.style.display = 'none');
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + page).style.display = 'block';
+  document.getElementById('nav-' + page).classList.add('active');
+  if (page === 'galaxy') initGalaxyCanvas();
+  if (page === 'games' && !spaceGameRunning) initSpaceCanvas();
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ─── Stars ───
+function createStars() {
+  const c = document.getElementById('stars-container');
+  for (let i = 0; i < 80; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.textContent = ['✦','✧','·','•'][Math.floor(Math.random()*4)];
+    s.style.cssText = `position:absolute;left:${Math.random()*100}%;top:${Math.random()*100}%;color:rgba(150,200,255,${0.2+Math.random()*0.5});font-size:${4+Math.random()*10}px;animation-delay:${Math.random()*5}s;animation-duration:${2+Math.random()*4}s;`;
+    c.appendChild(s);
+  }
+}
+createStars();
+
+// ─── Quadratic Solver ───
+function fmt(n) {
+  if (Math.abs(n - Math.round(n)) < 1e-10) return Math.round(n).toString();
+  return n.toFixed(6).replace(/0+$/, '').replace(/\.$/, '');
+}
+
+function fmtCoeff(n, varName, first) {
+  if (n === 0) return '';
+  let s = '';
+  if (!first && n > 0) s = ' + ';
+  else if (n < 0) s = first ? '-' : ' - ';
+  const abs = Math.abs(n);
+  if (varName && abs === 1) return s + varName;
+  return s + fmt(abs) + (varName || '');
+}
+
+function formatEquation(a, b, c) {
+  let parts = [];
+  parts.push(fmtCoeff(a, 'x²', true));
+  parts.push(fmtCoeff(b, 'x', false));
+  parts.push(fmtCoeff(c, '', false));
+  return (parts.join('') || '0') + ' = 0';
+}
+
+function randomEquation() {
+  const a = Math.floor(Math.random()*9) - 4 || 1;
+  const b = Math.floor(Math.random()*21) - 10;
+  const c = Math.floor(Math.random()*21) - 10;
+  document.getElementById('coeff-a').value = a;
+  document.getElementById('coeff-b').value = b;
+  document.getElementById('coeff-c').value = c;
+  solveEquation();
+}
+
+function solveEquation() {
+  const a = parseFloat(document.getElementById('coeff-a').value) || 0;
+  const b = parseFloat(document.getElementById('coeff-b').value) || 0;
+  const c = parseFloat(document.getElementById('coeff-c').value) || 0;
+
+  if (a === 0) { showToast("⚠️ 'a' sıfır olamaz!"); return; }
+
+  const eq = formatEquation(a, b, c);
+  document.getElementById('equationDisplay').textContent = eq;
+  document.getElementById('results').style.display = 'block';
+  document.getElementById('saveBtn').style.display = 'inline-flex';
+
+  const disc = b*b - 4*a*c;
+
+  // Discriminant
+  let dHTML = `<div class="step-box">Δ = b² - 4ac = (${fmt(b)})² - 4·(${fmt(a)})·(${fmt(c)})</div>`;
+  dHTML += `<div class="step-box">Δ = ${fmt(b*b)} - ${fmt(4*a*c)} = <strong>${fmt(disc)}</strong></div>`;
+
+  if (disc > 0) {
+    dHTML += `<div class="discriminant-badge disc-positive" style="margin-top:10px;">✅ Δ > 0 → İki farklı gerçek kök</div>`;
+  } else if (disc === 0) {
+    dHTML += `<div class="discriminant-badge disc-zero" style="margin-top:10px;">⚠️ Δ = 0 → Bir çift kök (tekrarlı)</div>`;
+  } else {
+    dHTML += `<div class="discriminant-badge disc-negative" style="margin-top:10px;">🔴 Δ < 0 → İki karmaşık (kompleks) kök</div>`;
+  }
+  document.getElementById('discContent').innerHTML = dHTML;
+
+  // Method 1: Root Formula
+  solveFormula(a, b, c, disc);
+  // Method 2: Completing Square
+  solveSquare(a, b, c, disc);
+  // Method 3: Factorization
+  solveFactor(a, b, c, disc);
+  // Verify
+  verifySolution(a, b, c, disc);
+  // Graph
+  drawGraph(a, b, c);
+
+  showMethod('formula');
+}
+
+function solveFormula(a, b, c, disc) {
+  let html = `<div class="flex items-center gap-3 mb-3"><span style="font-size:1.3rem;">📐</span><h3 style="font-family:'Orbitron',monospace;font-size:0.95rem;color:#00c8ff;">Yöntem 1: Kök Formülü</h3></div>`;
+  html += `<div class="step-box"><strong>Adım 1:</strong> x = (-b ± √Δ) / 2a</div>`;
+  html += `<div class="step-box"><strong>Adım 2:</strong> x = (-(${fmt(b)}) ± √${fmt(disc)}) / (2·${fmt(a)})</div>`;
+  html += `<div class="step-box"><strong>Adım 3:</strong> x = (${fmt(-b)} ± √${fmt(disc)}) / ${fmt(2*a)}</div>`;
+
+  if (disc >= 0) {
+    const sqrtD = Math.sqrt(disc);
+    const x1 = (-b + sqrtD) / (2*a);
+    const x2 = (-b - sqrtD) / (2*a);
+    html += `<div class="step-box"><strong>Adım 4:</strong> √${fmt(disc)} = ${fmt(sqrtD)}</div>`;
+    html += `<div class="step-box" style="border-color:#00ff64;"><strong>x₁ = (${fmt(-b)} + ${fmt(sqrtD)}) / ${fmt(2*a)} = <span style="color:#00ffc8;">${fmt(x1)}</span></strong></div>`;
+    html += `<div class="step-box" style="border-color:#00ff64;"><strong>x₂ = (${fmt(-b)} - ${fmt(sqrtD)}) / ${fmt(2*a)} = <span style="color:#00ffc8;">${fmt(x2)}</span></strong></div>`;
+  } else {
+    const sqrtAbsD = Math.sqrt(Math.abs(disc));
+    const real = -b / (2*a);
+    const imag = sqrtAbsD / (2*a);
+    html += `<div class="step-box"><strong>Adım 4:</strong> √(${fmt(disc)}) = ${fmt(sqrtAbsD)}i</div>`;
+    html += `<div class="step-box" style="border-color:#ff3264;"><strong>x₁ = <span style="color:#ff6688;">${fmt(real)} + ${fmt(imag)}i</span></strong></div>`;
+    html += `<div class="step-box" style="border-color:#ff3264;"><strong>x₂ = <span style="color:#ff6688;">${fmt(real)} - ${fmt(imag)}i</span></strong></div>`;
+  }
+  document.getElementById('method-formula').innerHTML = html;
+}
+
+function solveSquare(a, b, c, disc) {
+  let html = `<div class="flex items-center gap-3 mb-3"><span style="font-size:1.3rem;">⬛</span><h3 style="font-family:'Orbitron',monospace;font-size:0.95rem;color:#aa88ff;">Yöntem 2: Tam Kareye Tamamlama</h3></div>`;
+  html += `<div class="step-box"><strong>Adım 1:</strong> ${formatEquation(a,b,c)}</div>`;
+
+  if (a !== 1) {
+    html += `<div class="step-box"><strong>Adım 2:</strong> Her iki tarafı ${fmt(a)}'e böl → x² + ${fmt(b/a)}x + ${fmt(c/a)} = 0</div>`;
+  }
+  const p = b / a, q = c / a;
+  const half = p / 2;
+  html += `<div class="step-box"><strong>Adım 3:</strong> x² + ${fmt(p)}x = ${fmt(-q)}</div>`;
+  html += `<div class="step-box"><strong>Adım 4:</strong> (b/2a)² = (${fmt(half)})² = ${fmt(half*half)} ekle</div>`;
+  html += `<div class="step-box"><strong>Adım 5:</strong> (x + ${fmt(half)})² = ${fmt(-q + half*half)}</div>`;
+
+  const rhs = -q + half*half;
+  if (rhs >= 0) {
+    const sr = Math.sqrt(rhs);
+    html += `<div class="step-box"><strong>Adım 6:</strong> x + ${fmt(half)} = ±${fmt(sr)}</div>`;
+    html += `<div class="step-box" style="border-color:#00ff64;"><strong>x₁ = ${fmt(-half + sr)}, x₂ = ${fmt(-half - sr)}</strong></div>`;
+  } else {
+    const sr = Math.sqrt(Math.abs(rhs));
+    html += `<div class="step-box" style="border-color:#ff3264;"><strong>x = ${fmt(-half)} ± ${fmt(sr)}i</strong> (Kompleks kökler)</div>`;
+  }
+  document.getElementById('method-square').innerHTML = html;
+}
+
+function solveFactor(a, b, c, disc) {
+  let html = `<div class="flex items-center gap-3 mb-3"><span style="font-size:1.3rem;">🔢</span><h3 style="font-family:'Orbitron',monospace;font-size:0.95rem;color:#ffaa00;">Yöntem 3: Çarpanlara Ayırma</h3></div>`;
+
+  if (disc < 0) {
+    html += `<div class="step-box" style="border-color:#ff3264;">Δ < 0 olduğundan gerçek sayılarda çarpanlara ayırma yapılamaz.</div>`;
+    html += `<div class="step-box">Kompleks çarpanlar: a(x - x₁)(x - x₂) şeklinde yazılır</div>`;
+    const real = -b / (2*a), imag = Math.sqrt(-disc) / (2*a);
+    html += `<div class="step-box" style="border-color:#ff3264;"><strong>${fmt(a)}·(x - (${fmt(real)}+${fmt(imag)}i))·(x - (${fmt(real)}-${fmt(imag)}i)) = 0</strong></div>`;
+  } else {
+    const sqrtD = Math.sqrt(disc);
+    const x1 = (-b + sqrtD) / (2*a);
+    const x2 = (-b - sqrtD) / (2*a);
+
+    html += `<div class="step-box"><strong>Adım 1:</strong> Kökleri bul: x₁ = ${fmt(x1)}, x₂ = ${fmt(x2)}</div>`;
+    html += `<div class="step-box"><strong>Adım 2:</strong> Vieta formülleri ile kontrol:</div>`;
+    html += `<div class="step-box">x₁ + x₂ = ${fmt(x1+x2)} (olması gereken: -b/a = ${fmt(-b/a)})</div>`;
+    html += `<div class="step-box">x₁ · x₂ = ${fmt(x1*x2)} (olması gereken: c/a = ${fmt(c/a)})</div>`;
+    html += `<div class="step-box" style="border-color:#00ff64;"><strong>Adım 3:</strong> ${fmt(a)}·(x - ${fmt(x1)})·(x - ${fmt(x2)}) = 0</div>`;
+
+    // Check integer factoring
+    if (Math.abs(x1 - Math.round(x1)) < 1e-9 && Math.abs(x2 - Math.round(x2)) < 1e-9 && Math.abs(a - Math.round(a)) < 1e-9) {
+      const r1 = Math.round(x1), r2 = Math.round(x2), ia = Math.round(a);
+      html += `<div class="step-box" style="border-color:#ffaa00;">🎉 Tam sayı çarpanlar: ${ia === 1 ? '' : fmt(ia)}(x ${r1 >= 0 ? '- '+r1 : '+ '+(-r1)})(x ${r2 >= 0 ? '- '+r2 : '+ '+(-r2)}) = 0</div>`;
+    }
+  }
+  document.getElementById('method-factor').innerHTML = html;
+}
+
+function verifySolution(a, b, c, disc) {
+  let html = '';
+  if (disc >= 0) {
+    const sqrtD = Math.sqrt(disc);
+    const x1 = (-b + sqrtD) / (2*a);
+    const x2 = (-b - sqrtD) / (2*a);
+    const v1 = a*x1*x1 + b*x1 + c;
+    const v2 = a*x2*x2 + b*x2 + c;
+    html += `<div class="step-box">x₁ = ${fmt(x1)} yerine koy: ${fmt(a)}·(${fmt(x1)})² + ${fmt(b)}·(${fmt(x1)}) + ${fmt(c)} = <strong style="color:${Math.abs(v1)<1e-8?'#00ff64':'#ff3264'}">${fmt(v1)}</strong> ${Math.abs(v1)<1e-8?'✅':'❌'}</div>`;
+    html += `<div class="step-box">x₂ = ${fmt(x2)} yerine koy: ${fmt(a)}·(${fmt(x2)})² + ${fmt(b)}·(${fmt(x2)}) + ${fmt(c)} = <strong style="color:${Math.abs(v2)<1e-8?'#00ff64':'#ff3264'}">${fmt(v2)}</strong> ${Math.abs(v2)<1e-8?'✅':'❌'}</div>`;
+  } else {
+    const real = -b / (2*a), imag = Math.sqrt(-disc) / (2*a);
+    // verify: a(r+qi)^2 + b(r+qi) + c
+    const realPart = a*(real*real - imag*imag) + b*real + c;
+    const imagPart = 2*a*real*imag + b*imag;
+    html += `<div class="step-box">x₁ = ${fmt(real)} + ${fmt(imag)}i yerine koy:</div>`;
+    html += `<div class="step-box">Gerçek kısım: ${fmt(realPart)} ${Math.abs(realPart)<1e-8?'✅':'❌'}</div>`;
+    html += `<div class="step-box">Sanal kısım: ${fmt(imagPart)}i ${Math.abs(imagPart)<1e-8?'✅':'❌'}</div>`;
+  }
+  document.getElementById('verifyContent').innerHTML = html;
+}
+
+function showMethod(m) {
+  ['formula','square','factor'].forEach(id => {
+    document.getElementById('method-' + id).style.display = id === m ? 'block' : 'none';
+    document.getElementById('tab-' + id).classList.toggle('active', id === m);
+  });
+}
+
+// ─── Graph ───
+function drawGraph(a, b, c) {
+  const canvas = document.getElementById('graphCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width = canvas.offsetWidth * 2;
+  const H = canvas.height = canvas.offsetHeight * 2;
+  ctx.clearRect(0, 0, W, H);
+
+  const vertex_x = -b / (2*a);
+  const vertex_y = a*vertex_x*vertex_x + b*vertex_x + c;
+
+  const range = Math.max(10, Math.abs(vertex_x)*3, Math.sqrt(Math.abs(vertex_y))*2);
+  const xMin = vertex_x - range, xMax = vertex_x + range;
+
+  let yVals = [];
+  for (let px = 0; px < W; px++) {
+    const x = xMin + (px/W)*(xMax-xMin);
+    yVals.push(a*x*x + b*x + c);
+  }
+  const yMin = Math.min(...yVals, 0) - 2;
+  const yMax = Math.max(...yVals, 0) + 2;
+
+  function toScreen(x, y) {
+    return [((x-xMin)/(xMax-xMin))*W, H - ((y-yMin)/(yMax-yMin))*H];
+  }
+
+  // Grid
+  ctx.strokeStyle = 'rgba(100,200,255,0.08)';
+  ctx.lineWidth = 1;
+  for (let i = 0; i <= 10; i++) {
+    const x = i/10 * W, y = i/10 * H;
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+  }
+
+  // Axes
+  const [ox, oy] = toScreen(0, 0);
+  ctx.strokeStyle = 'rgba(100,200,255,0.3)';
+  ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(0, oy); ctx.lineTo(W, oy); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(ox, 0); ctx.lineTo(ox, H); ctx.stroke();
+
+  // Parabola
+  ctx.strokeStyle = '#00ffc8';
+  ctx.lineWidth = 3;
+  ctx.shadowColor = '#00ffc8';
+  ctx.shadowBlur = 10;
+  ctx.beginPath();
+  for (let px = 0; px < W; px++) {
+    const x = xMin + (px/W)*(xMax-xMin);
+    const y = a*x*x + b*x + c;
+    const [sx, sy] = toScreen(x, y);
+    if (sy < -100 || sy > H+100) continue;
+    if (px === 0) ctx.moveTo(sx, sy); else ctx.lineTo(sx, sy);
+  }
+  ctx.stroke();
+  ctx.shadowBlur = 0;
+
+  // Roots
+  const disc = b*b - 4*a*c;
+  if (disc >= 0) {
+    const sqrtD = Math.sqrt(disc);
+    [(-b+sqrtD)/(2*a), (-b-sqrtD)/(2*a)].forEach(rx => {
+      const [sx, sy] = toScreen(rx, 0);
+      ctx.fillStyle = '#ff4488';
+      ctx.beginPath(); ctx.arc(sx, sy, 8, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#fff';
+      ctx.font = '20px Orbitron';
+      ctx.fillText(fmt(rx), sx+12, sy-12);
+    });
+  }
+
+  // Vertex
+  const [vx, vy] = toScreen(vertex_x, vertex_y);
+  ctx.fillStyle = '#ffaa00';
+  ctx.beginPath(); ctx.arc(vx, vy, 8, 0, Math.PI*2); ctx.fill();
+}
+
+// ─── Quiz Game ───
+let quizScore = 0, quizTimer = null, quizTimeLeft = 0, currentAnswer = 0;
+
+function startQuiz() {
+  quizScore = 0;
+  document.getElementById('gameScore').textContent = 'Skor: 0';
+  document.getElementById('quizStartBtn').style.display = 'none';
+  nextQuestion();
+}
+
+function nextQuestion() {
+  const ops = ['+', '-', '×'];
+  const op = ops[Math.floor(Math.random()*3)];
+  let a, b, answer;
+  if (op === '×') {
+    a = Math.floor(Math.random()*12)+2;
+    b = Math.floor(Math.random()*12)+2;
+    answer = a*b;
+  } else if (op === '+') {
+    a = Math.floor(Math.random()*100)+10;
+    b = Math.floor(Math.random()*100)+10;
+    answer = a+b;
+  } else {
+    a = Math.floor(Math.random()*100)+20;
+    b = Math.floor(Math.random()*a);
+    answer = a-b;
+  }
+  currentAnswer = answer;
+  document.getElementById('quizQuestion').textContent = `${a} ${op} ${b} = ?`;
+  document.getElementById('quizFeedback').textContent = '';
+
+  // Options
+  const options = [answer];
+  while (options.length < 4) {
+    const fake = answer + Math.floor(Math.random()*21) - 10;
+    if (fake !== answer && !options.includes(fake)) options.push(fake);
+  }
+  options.sort(() => Math.random()-0.5);
+
+  const optDiv = document.getElementById('quizOptions');
+  optDiv.innerHTML = '';
+  options.forEach(o => {
+    const btn = document.createElement('button');
+    btn.className = 'solve-btn';
+    btn.style.background = 'linear-gradient(135deg, #1a1a4e, #2a1a5e)';
+    btn.style.border = '1px solid rgba(100,200,255,0.2)';
+    btn.style.fontSize = '1.2rem';
+    btn.textContent = o;
+    btn.onclick = () => checkAnswer(o);
+    optDiv.appendChild(btn);
+  });
+
+  quizTimeLeft = 10;
+  document.getElementById('quizTimer').textContent = '⏱️ ' + quizTimeLeft;
+  clearInterval(quizTimer);
+  quizTimer = setInterval(() => {
+    quizTimeLeft--;
+    document.getElementById('quizTimer').textContent = '⏱️ ' + quizTimeLeft;
+    if (quizTimeLeft <= 0) {
+      clearInterval(quizTimer);
+      document.getElementById('quizFeedback').innerHTML = `<span style="color:#ff4488;">⏰ Süre doldu! Cevap: ${currentAnswer}</span>`;
+      setTimeout(nextQuestion, 1500);
+    }
+  }, 1000);
+}
+
+function checkAnswer(selected) {
+  clearInterval(quizTimer);
+  if (selected === currentAnswer) {
+    quizScore += quizTimeLeft * 10;
+    document.getElementById('quizFeedback').innerHTML = `<span style="color:#00ffc8;">🎉 Doğru! +${quizTimeLeft*10} puan</span>`;
+  } else {
+    document.getElementById('quizFeedback').innerHTML = `<span style="color:#ff4488;">❌ Yanlış! Doğru: ${currentAnswer}</span>`;
+  }
+  document.getElementById('gameScore').textContent = 'Skor: ' + quizScore;
+  setTimeout(nextQuestion, 1500);
+}
+
+// ─── Space Game ───
+let spaceGameRunning = false, spaceScore2 = 0, spaceShip = {x:0,y:0}, asteroids = [], bullets = [], spaceAnim = null;
+
+function initSpaceCanvas() {
+  const canvas = document.getElementById('spaceCanvas');
+  canvas.width = canvas.offsetWidth * 2;
+  canvas.height = canvas.offsetHeight * 2;
+}
+
+function startSpaceGame() {
+  initSpaceCanvas();
+  const canvas = document.getElementById('spaceCanvas');
+  spaceGameRunning = true;
+  spaceScore2 = 0;
+  spaceShip = { x: canvas.width/2, y: canvas.height - 60 };
+  asteroids = [];
+  bullets = [];
+  document.getElementById('spaceScore').textContent = 'Puan: 0';
+
+  canvas.onmousemove = (e) => {
+    const rect = canvas.getBoundingClientRect();
+    spaceShip.x = (e.clientX - rect.left) / rect.width * canvas.width;
+  };
+  canvas.ontouchmove = (e) => {
+    e.preventDefault();
+    const rect = canvas.getBoundingClientRect();
+    spaceShip.x = (e.touches[0].clientX - rect.left) / rect.width * canvas.width;
+  };
+
+  if (spaceAnim) cancelAnimationFrame(spaceAnim);
+  gameLoop();
+}
+
+function shootBullet(e) {
+  if (!spaceGameRunning) return;
+  bullets.push({ x: spaceShip.x, y: spaceShip.y - 20, vy: -15 });
+}
+
+function gameLoop() {
+  const canvas = document.getElementById('spaceCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  ctx.clearRect(0, 0, W, H);
+
+  // Stars BG
+  for (let i = 0; i < 30; i++) {
+    ctx.fillStyle = `rgba(200,220,255,${0.1+Math.random()*0.3})`;
+    ctx.fillRect(Math.random()*W, Math.random()*H, 2, 2);
+  }
+
+  // Spawn asteroids
+  if (Math.random() < 0.03) {
+    asteroids.push({ x: Math.random()*W, y: -30, r: 15+Math.random()*25, vy: 2+Math.random()*3, emoji: ['🪨','☄️','💎'][Math.floor(Math.random()*3)] });
+  }
+
+  // Ship
+  ctx.font = '40px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('🚀', spaceShip.x, spaceShip.y);
+
+  // Bullets
+  ctx.fillStyle = '#00ffc8';
+  bullets.forEach((b, i) => {
+    b.y += b.vy;
+    ctx.beginPath();
+    ctx.arc(b.x, b.y, 4, 0, Math.PI*2);
+    ctx.fill();
+    ctx.shadowColor = '#00ffc8';
+    ctx.shadowBlur = 8;
+    ctx.fill();
+    ctx.shadowBlur = 0;
+  });
+  bullets = bullets.filter(b => b.y > -10);
+
+  // Asteroids
+  asteroids.forEach((a, ai) => {
+    a.y += a.vy;
+    ctx.font = `${a.r*2}px sans-serif`;
+    ctx.fillText(a.emoji, a.x, a.y);
+
+    // Collision with bullets
+    bullets.forEach((b, bi) => {
+      const dx = a.x - b.x, dy = a.y - b.y;
+      if (Math.sqrt(dx*dx+dy*dy) < a.r + 10) {
+        asteroids.splice(ai, 1);
+        bullets.splice(bi, 1);
+        spaceScore2 += 10;
+        document.getElementById('spaceScore').textContent = 'Puan: ' + spaceScore2;
+      }
+    });
+  });
+  asteroids = asteroids.filter(a => a.y < H + 50);
+
+  // Check game over
+  asteroids.forEach(a => {
+    const dx = a.x - spaceShip.x, dy = a.y - spaceShip.y;
+    if (Math.sqrt(dx*dx+dy*dy) < a.r + 20) {
+      spaceGameRunning = false;
+      showToast(`💥 Oyun Bitti! Puan: ${spaceScore2}`);
+    }
+  });
+
+  if (spaceGameRunning) spaceAnim = requestAnimationFrame(gameLoop);
+}
+
+// ─── 3D Galaxy Canvas ───
+function initGalaxyCanvas() {
+  const canvas = document.getElementById('galaxyCanvas');
+  if (!canvas) return;
+  canvas.width = canvas.offsetWidth * 2;
+  canvas.height = canvas.offsetHeight * 2;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  let rotation = 0;
+
+  function drawGalaxy() {
+    ctx.clearRect(0, 0, W, H);
+    
+    // 3D Background gradient
+    const grad = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, W/2);
+    grad.addColorStop(0, '#2a1a5e');
+    grad.addColorStop(0.5, '#0a0a3e');
+    grad.addColorStop(1, '#050520');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, W, H);
+
+    // Cosmic dust particles (depth effect)
+    ctx.globalAlpha = 0.3;
+    for (let i = 0; i < 150; i++) {
+      const angle = (i / 150) * Math.PI * 2 + rotation * 0.5;
+      const r = 50 + (i % 5) * 60;
+      const x = W/2 + Math.cos(angle) * r;
+      const y = H/2 + Math.sin(angle) * r * 0.5;
+      const size = 1 + (i % 3) * 1.5;
+      ctx.fillStyle = `hsl(${200 + (i%60)}, 100%, ${50 + (i%30)}%)`;
+      ctx.fillRect(x, y, size, size);
+    }
+    ctx.globalAlpha = 1;
+
+    // 3D Galaxy arms with perspective
+    for (let arm = 0; arm < 3; arm++) {
+      ctx.beginPath();
+      ctx.strokeStyle = `rgba(${100+arm*30},${150+arm*20},${255-arm*20},0.2)`;
+      ctx.lineWidth = 4;
+      
+      for (let t = 0; t < 20; t += 0.1) {
+        const angle = t + arm * (Math.PI*2/3) + rotation * 0.3;
+        const r = t * 30;
+        const depth = 1 + (Math.sin(t + rotation * 0.2) * 0.3);
+        const x = W/2 + Math.cos(angle) * r * depth;
+        const y = H/2 + Math.sin(angle) * r * depth * 0.6;
+        
+        if (t === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    }
+
+    // Energy cores along arms
+    for (let i = 0; i < 12; i++) {
+      const angle = (i / 12) * Math.PI * 2 + rotation * 0.5;
+      const r = 80 + Math.sin(rotation * 0.03 + i) * 40;
+      const x = W/2 + Math.cos(angle) * r;
+      const y = H/2 + Math.sin(angle) * r * 0.6;
+      
+      ctx.fillStyle = `rgba(${100 + Math.sin(rotation*0.02+i)*50}, ${150 + Math.cos(rotation*0.02+i)*50}, 255, 0.6)`;
+      ctx.beginPath();
+      ctx.arc(x, y, 6 + Math.sin(rotation*0.05+i)*3, 0, Math.PI*2);
+      ctx.fill();
+      
+      ctx.strokeStyle = `rgba(0, 255, 200, ${0.3+Math.sin(rotation*0.03+i)*0.3})`;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(x, y, 10 + Math.sin(rotation*0.03+i)*4, 0, Math.PI*2);
+      ctx.stroke();
+    }
+
+    // Planets with 3D effect
+    const planets = [
+      { angle: rotation*0.02, radius: 150, emoji: '🪐', color: '#ff6644' },
+      { angle: rotation*0.015 + Math.PI/3, radius: 180, emoji: '🌍', color: '#00ffc8' },
+      { angle: rotation*0.01 + 2*Math.PI/3, radius: 160, emoji: '⭐', color: '#ffaa00' },
+      { angle: rotation*0.008 + Math.PI, radius: 190, emoji: '🌙', color: '#aa44ff' },
+      { angle: rotation*0.025 + 4*Math.PI/3, radius: 170, emoji: '🛸', color: '#ff44aa' }
+    ];
+    
+    planets.forEach(p => {
+      const x = W/2 + Math.cos(p.angle) * p.radius;
+      const y = H/2 + Math.sin(p.angle) * p.radius * 0.6;
+      
+      // Planet glow
+      ctx.fillStyle = p.color.replace(')', ', 0.15)').replace('rgb', 'rgba');
+      ctx.beginPath();
+      ctx.arc(x, y, 35, 0, Math.PI*2);
+      ctx.fill();
+      
+      // Planet emoji
+      ctx.font = `60px sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(p.emoji, x, y);
+      
+      // Orbit ring
+      ctx.strokeStyle = p.color.replace(')', ', 0.2)').replace('rgb', 'rgba');
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(x, y, 40, 0, Math.PI*2);
+      ctx.stroke();
+    });
+
+    // Central Octal structure (3D star intersections)
+    const centerSize = 80 + Math.sin(rotation * 0.05) * 20;
+    
+    // Draw intersecting star tips
+    for (let i = 0; i < 8; i++) {
+      const angle = (i / 8) * Math.PI * 2 + rotation * 0.03;
+      const tipX = W/2 + Math.cos(angle) * centerSize;
+      const tipY = H/2 + Math.sin(angle) * centerSize * 0.8;
+      
+      ctx.strokeStyle = `hsl(${i*45}, 100%, 60%)`;
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(W/2, H/2);
+      ctx.lineTo(tipX, tipY);
+      ctx.stroke();
+      
+      // Energy dot at tip
+      ctx.fillStyle = `hsl(${i*45}, 100%, ${60 + Math.sin(rotation*0.04+i)*20}%)`;
+      ctx.beginPath();
+      ctx.arc(tipX, tipY, 8 + Math.sin(rotation*0.05+i)*4, 0, Math.PI*2);
+      ctx.fill();
+    }
+    
+    // Central core
+    const coreGrad = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, 40);
+    coreGrad.addColorStop(0, 'rgba(255, 255, 100, 0.8)');
+    coreGrad.addColorStop(0.5, 'rgba(100, 200, 255, 0.4)');
+    coreGrad.addColorStop(1, 'rgba(255, 100, 255, 0.1)');
+    ctx.fillStyle = coreGrad;
+    ctx.beginPath();
+    ctx.arc(W/2, H/2, 40, 0, Math.PI*2);
+    ctx.fill();
+    
+    ctx.fillStyle = '#00ffc8';
+    ctx.font = '50px Orbitron';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('⍟', W/2, H/2);
+    
+    ctx.fillStyle = '#ffaa00';
+    ctx.font = 'bold 24px Orbitron';
+    ctx.fillText('OCTAL', W/2, H/2 + 60);
+
+    rotation += 0.5;
+    requestAnimationFrame(drawGalaxy);
+  }
+
+  drawGalaxy();
+}
+
+// ─── Hero canvas ───
+function initHeroCanvas() {
+  const canvas = document.getElementById('heroCanvas');
+  if (!canvas) return;
+  canvas.width = canvas.offsetWidth * 2;
+  canvas.height = canvas.offsetHeight * 2;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+
+  const grad = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, W/2);
+  grad.addColorStop(0, '#0a0a3e');
+  grad.addColorStop(1, '#050520');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, W, H);
+
+  for (let i = 0; i < 100; i++) {
+    ctx.fillStyle = `rgba(200,220,255,${0.2+Math.random()*0.5})`;
+    ctx.fillRect(Math.random()*W, Math.random()*H, 1+Math.random()*2, 1+Math.random()*2);
+  }
+}
+
+// Init
+initHeroCanvas();
+lucide.createIcons();
+
+// ─── Archive Functions ───
+async function saveToArchive() {
+  const a = parseFloat(document.getElementById('coeff-a').value);
+  const b = parseFloat(document.getElementById('coeff-b').value);
+  const c = parseFloat(document.getElementById('coeff-c').value);
+  const equation = formatEquation(a, b, c);
+  
+  if (archiveData.length >= 999) {
+    showToast('⚠️ Arşiv dolu! Maksimum 999 denklem kaydedilebilir.');
+    return;
+  }
+  
+  const result = await window.dataSdk.create({
+    id: Date.now().toString(),
+    a: a,
+    b: b,
+    c: c,
+    equation: equation,
+    timestamp: new Date().toISOString(),
+    notes: ''
+  });
+  
+  if (result.isOk) {
+    showToast('✅ Denklem arşive kaydedildi!');
+    document.getElementById('saveBtn').style.display = 'none';
+  } else {
+    showToast('❌ Kaydetme başarısız!');
+  }
+}
+
+function updateArchiveDisplay() {
+  const container = document.getElementById('archiveList');
+  document.getElementById('archiveCount').textContent = `Toplam: ${archiveData.length}`;
+  
+  if (archiveData.length === 0) {
+    container.innerHTML = `<p style="font-family:'Fredoka',sans-serif;color:#5566aa;text-align:center;padding:20px;">Henüz kaydedilmiş denklem yok.</p>`;
+    return;
+  }
+  
+  const existingItems = new Map(
+    [...container.children].map(el => [el.dataset.itemId, el])
+  );
+  
+  archiveData.forEach(item => {
+    if (existingItems.has(item.__backendId)) {
+      existingItems.delete(item.__backendId);
+    } else {
+      const el = document.createElement('div');
+      el.dataset.itemId = item.__backendId;
+      el.className = 'galaxy-card p-4 fade-in';
+      el.style.display = 'flex';
+      el.style.justifyContent = 'space-between';
+      el.style.alignItems = 'center';
+      el.style.gap = '12px';
+      
+      const date = new Date(item.timestamp);
+      const dateStr = date.toLocaleDateString('tr-TR', { hour: '2-digit', minute: '2-digit' });
+      
+      el.innerHTML = `
+        <div style="flex:1;">
+          <div style="font-family:'Orbitron',monospace;color:#00ffc8;font-size:0.95rem;margin-bottom:4px;">${item.equation}</div>
+          <div style="font-family:'Fredoka',sans-serif;color:#5566aa;font-size:0.75rem;">📅 ${dateStr}</div>
+        </div>
+        <button class="solve-btn" style="background:linear-gradient(135deg,#00c8ff,#0066ff);padding:8px 16px;font-size:0.85rem;" onclick="loadFromArchive('${item.a}','${item.b}','${item.c}')">📂 Yükle</button>
+        <button class="solve-btn" style="background:linear-gradient(135deg,#ff4444,#cc0000);padding:8px 16px;font-size:0.85rem;" onclick="deleteFromArchive('${item.__backendId}')">🗑️</button>
+      `;
+      container.appendChild(el);
+    }
+  });
+  
+  existingItems.forEach(el => el.remove());
+}
+
+function loadFromArchive(a, b, c) {
+  document.getElementById('coeff-a').value = a;
+  document.getElementById('coeff-b').value = b;
+  document.getElementById('coeff-c').value = c;
+  showPage('math');
+  solveEquation();
+  showToast('✅ Denklem yüklendi!');
+}
+
+async function deleteFromArchive(id) {
+  const item = archiveData.find(i => i.__backendId === id);
+  if (!item) return;
+  
+  const result = await window.dataSdk.delete(item);
+  if (result.isOk) {
+    showToast('🗑️ Denklem silindi!');
+  } else {
+    showToast('❌ Silme başarısız!');
+  }
+}
+
+// Auto-solve default
+solveEquation();
+</script>
+ </body>
+</html>
+<a herf=<!doctype html>
 <html lang="en"><head><script>window["__codeletBootstrap__"]=JSON.parse('{"A":"A","B":"20260723-05-e9a76f4"}');</script><script src="/_sdk/e358eac22bd01364.telemetry_sdk.js" integrity="sha512-KPxp3rw4K8Nu9ceWJc3gyM7srgaZxiFWOVbyu260EYzzAqdz10mfo5xyXrCx+wEKtGo77JbtmwXvFLbwrGzwvw=="></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1478,7 +2805,7 @@
 
     lucide.createIcons();
   })();
-  </script>
+  </script>  </a>
  
 </body></html>
 <!-- Add this to <head> -->
